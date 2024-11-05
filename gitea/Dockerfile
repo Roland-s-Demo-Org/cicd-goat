@@ -25,6 +25,9 @@ COPY . /setup/
 RUN /setup/check_git.py && chmod 755 /setup/giteacasc/askpass.py /setup/run
 COPY --chown=git:git app.ini /data/gitea/conf/
 
+# Set proper ownership and switch to non-root user
+RUN (chown -R 1000:1000 /setup)
+
+USER 1000
+
 ENTRYPOINT ["/setup/run"]
-
-
