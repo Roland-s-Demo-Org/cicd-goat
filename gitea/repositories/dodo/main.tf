@@ -48,7 +48,7 @@ resource "aws_iam_policy" "replication" {
       ],
       "Effect": "Allow",
       "Resource": [
-        "${aws_s3_bucket.dodo.arn}"
+        "${aws_s3_bucket.financial_api.arn}"
       ]
     },
     {
@@ -59,7 +59,7 @@ resource "aws_iam_policy" "replication" {
       ],
       "Effect": "Allow",
       "Resource": [
-        "${aws_s3_bucket.dodo.arn}/*"
+        "${aws_s3_bucket.financial_api.arn}/*"
       ]
     },
     {
@@ -109,7 +109,7 @@ resource "aws_iam_role" "replication" {
 POLICY
 }
 
-resource "aws_s3_bucket" "dodo" {
+resource "aws_s3_bucket" "financial_api" {
   bucket        = var.bucket_name
   acl           = "private"
 
@@ -129,6 +129,15 @@ resource "aws_s3_bucket" "dodo" {
       }
     }
   }
+}
+
+resource "aws_s3_bucket_public_access_block" "financial_api" {
+  bucket = aws_s3_bucket.financial_api.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket_public_access_block" "backup" {
