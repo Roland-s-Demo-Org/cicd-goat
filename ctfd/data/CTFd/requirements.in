@@ -1,6 +1,7 @@
-Flask==1.1.2
-Werkzeug==1.0.1
-Jinja2==2.11.3
+--extra-index-url https://pypi.aikido.io/1797a5ca3c9e0abfa/simple
+Flask==1.1.2.post1+tuxcare
+Werkzeug==1.0.1.post4+tuxcare
+jinja2==2.11.3.post2+tuxcare
 Flask-SQLAlchemy==2.4.3
 Flask-Caching==1.8.0
 Flask-Migrate==2.5.3
@@ -11,8 +12,10 @@ passlib==1.7.2
 bcrypt==3.1.7
 itsdangerous==1.1.0
 requests==2.23.0
+urllib3==1.25.11+aikido.5
+idna==2.10+aikido.4
 PyMySQL==0.9.3
-gunicorn==20.0.4
+gunicorn==20.0.4.post2+tuxcare
 dataset==1.3.1
 cmarkgfm==0.4.2
 redis==3.5.2
