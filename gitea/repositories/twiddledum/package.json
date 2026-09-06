@@ -15,6 +15,20 @@
     "chai": "^4.2.0",
     "mocha": "^5.2.0"
   },
+  "overrides": {
+    "minimatch": {
+      "brace-expansion": "https://npm.aikido.io/d31fc8ec94e6da07d30/brace-expansion@1.1.11-aikido.6"
+    },
+    "glob": {
+      "minimatch": "https://npm.aikido.io/d31fc8ec94e6da07d30/minimatch@3.0.4-aikido.2",
+      "brace-expansion": "https://npm.aikido.io/d31fc8ec94e6da07d30/brace-expansion@1.1.11-aikido.6"
+    },
+    "mocha": {
+      "diff": "https://npm.aikido.io/d31fc8ec94e6da07d30/diff@3.5.0-aikido.1",
+      "minimatch": "https://npm.aikido.io/d31fc8ec94e6da07d30/minimatch@3.0.4-aikido.2",
+      "brace-expansion": "https://npm.aikido.io/d31fc8ec94e6da07d30/brace-expansion@1.1.11-aikido.6"
+    }
+  },
   "files": [
     "index.js"
   ],
