@@ -34,6 +34,7 @@ provider "aws" {
   }
 }
 
+# IAM policy for S3 replication - grants permissions to replicate from financial API bucket to backup
 resource "aws_iam_policy" "replication" {
   name = "tf-iam-role-policy-replication-12345"
 
@@ -48,7 +49,7 @@ resource "aws_iam_policy" "replication" {
       ],
       "Effect": "Allow",
       "Resource": [
-        "${aws_s3_bucket.dodo.arn}"
+        "${aws_s3_bucket.financial_api.arn}"
       ]
     },
     {
@@ -59,7 +60,7 @@ resource "aws_iam_policy" "replication" {
       ],
       "Effect": "Allow",
       "Resource": [
-        "${aws_s3_bucket.dodo.arn}/*"
+        "${aws_s3_bucket.financial_api.arn}/*"
       ]
     },
     {
@@ -109,7 +110,9 @@ resource "aws_iam_role" "replication" {
 POLICY
 }
 
-resource "aws_s3_bucket" "dodo" {
+# S3 bucket for financial API data storage
+# Renamed from "dodo" to "financial_api" to reflect the financial API context
+resource "aws_s3_bucket" "financial_api" {
   bucket        = var.bucket_name
   acl           = "private"
 
@@ -129,6 +132,18 @@ resource "aws_s3_bucket" "dodo" {
       }
     }
   }
+}
+
+# Public access block for financial API bucket
+# Prevents accidental public exposure of sensitive financial data
+# All public access settings are enabled for maximum security (CKV2_AWS_6 compliance)
+resource "aws_s3_bucket_public_access_block" "financial_api" {
+  bucket = aws_s3_bucket.financial_api.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket_public_access_block" "backup" {
