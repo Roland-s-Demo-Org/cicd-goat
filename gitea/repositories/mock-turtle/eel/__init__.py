@@ -152,7 +152,7 @@ def start(*start_urls, **kwargs):
         from jinja2 import Environment, FileSystemLoader, select_autoescape
         templates_path = os.path.join(root_path, _start_args['jinja_templates'])
         _start_args['jinja_env'] = Environment(loader=FileSystemLoader(templates_path),
-                                 autoescape=select_autoescape(['html', 'xml']))
+                                 autoescape=True)
 
     # verify shutdown_delay is correct value
     if not isinstance(_start_args['shutdown_delay'], (int, float)):
