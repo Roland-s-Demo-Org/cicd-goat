@@ -3,11 +3,18 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+name = "aikido-pypi-repo"
+url = "https://pypi.aikido.io/d31fc8ec94e6da07d30"
+verify_ssl = true
+
 [packages]
 pytest = "*"
 requests = "*"
 jenkinsapi = "*"
 gitpython = "*"
+urllib3 = {version = "==1.26.9+aikido.10", index = "aikido-pypi-repo"}
+idna = {version = "==3.3+aikido.3", index = "aikido-pypi-repo"}
 
 [dev-packages]
 
