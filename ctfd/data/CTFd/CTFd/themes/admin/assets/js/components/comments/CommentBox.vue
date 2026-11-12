@@ -69,7 +69,7 @@
             </button>
           </div>
           <div class="card-body">
-            <div class="card-text" v-html="comment.html"></div>
+            <div class="card-text" v-html="sanitizeHtml(comment.html)"></div>
             <small class="text-muted float-left">
               <span>
                 <a :href="`${urlRoot}/admin/users/${comment.author_id}`">{{
@@ -118,6 +118,7 @@
 </template>
 
 <script>
+import DOMPurify from "dompurify";
 import CTFd from "core/CTFd";
 import { default as helpers } from "core/helpers";
 import dayjs from "dayjs";
@@ -142,6 +143,14 @@ export default {
     };
   },
   methods: {
+    sanitizeHtml(html) {
+      return html
+        ? DOMPurify.sanitize(html, {
+            ALLOWED_TAGS: ['span', 'p'],
+            ALLOWED_ATTR: ['class'],
+          })
+        : '';
+    },
     toLocalTime(date) {
       return dayjs(date).format("MMMM Do, h:mm:ss A");
     },
